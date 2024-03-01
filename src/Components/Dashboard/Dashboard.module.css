@@ -47,7 +47,7 @@
 
 .maincontainer .titledate > p:nth-child(1){
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 8px;
 }
 .maincontainer .titledate > p:nth-child(2){
@@ -85,7 +85,7 @@
     min-width: 23rem;
     background-color: #EEF2F5;
     margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     border-radius: 10px;
     padding: 1rem;
 }
@@ -147,8 +147,8 @@
 
 .maincontainer .sectioncontainer .section .sectioncard .priority .popupcard{
     position: absolute;
-    width: 5rem;
-    height: 4rem;
+    width: 6rem;
+    /* height: 4rem; */
     right: 0px;
     top : 1.5rem;
     background-color: #fff;
@@ -161,7 +161,7 @@
 }
 .maincontainer .sectioncontainer .section .sectioncard .priority .popupcard p{
     margin: 0px;
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 6px;
     cursor: pointer;
     color: black;
@@ -195,6 +195,9 @@
     justify-content: space-between;
 }
 
+.Loading{
+    margin-left: 2rem;
+}
 .maincontainer .sectioncontainer .section .sectioncard .checklistclass > p{
     font-weight: 500;
 }

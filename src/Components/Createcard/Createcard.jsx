@@ -20,6 +20,7 @@ const Createcard = ({setCreatecardshow, checklistchanged, setchecklistchanged}) 
   const sectiontype = useSelector(store => store.checklist.sectiontype)
   const checklistid = useSelector(store=>store.user.checklisteditid)
   const userid = useSelector(store=>store.user.userid)
+  const [morethan2, setmorethan2] = useState(checklistarr.length > 2 ? true : false)
   const [saving, setsaving] = useState(false)
   const dispatch = useDispatch()
   function handlecancel(){
@@ -53,6 +54,14 @@ function savechecklist(){
     if(!isValid){
         alert("Either fiels are Empty or Checklist 0")
         return
+    }
+    let tempname = name.split(" ")
+    console.log(tempname);
+    let newname = ""
+    for(let i = 0; i < tempname.length; i++){
+        if(tempname[i].length > 20){
+            
+        }
     }
     setsaving(true)
     if(checklistid){
@@ -107,7 +116,7 @@ function savechecklist(){
                 </button>
             </div>
             <p>Checklist ({markedval}/{checklistarr.length}) <span>*</span></p>
-            <div className={styles.checklistcontainer}>
+            <div className={morethan2 ? styles.checklistcontainer : styles.checklistcontainer2}>
                 {
                     checklistarr.map((checklistobj, index) => {
                         return(

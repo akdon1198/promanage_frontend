@@ -3,9 +3,10 @@ import styles from "./Settings.module.css"
 import eyeimg from "../../images/eyeimg.png"
 import passwordimg from "../../images/passwordimg.png"
 import nameimg from "../../images/nameimg.png"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { commonapiurl } from '../../Constant'
+import { updatename } from '../../redux/Userslice'
 
 const Settings = () => {
   const [oldpasswordtype, setoldpasswordtype] = useState("password")
@@ -24,6 +25,7 @@ const Settings = () => {
     if(newpasswordtype == "password") setnewpasswordtype("text")
     else if(newpasswordtype == "text") setnewpasswordtype("password")
   }
+  const dispatch = useDispatch()
   function handleupdate(){
     if(name == "" && oldpassword == "" && newpassword == "") return
     if(oldpassword != newpassword){
@@ -38,6 +40,9 @@ const Settings = () => {
     setupdating(true)
     axios.patch(commonapiurl + "auth/updateuser/" + userid, {name, password : oldpassword})
     .then((response)=>{
+      if(name != ""){
+        dispatch(updatename(name))
+      }
       setupdating(false)
       setname("")
       setoldpassword("")

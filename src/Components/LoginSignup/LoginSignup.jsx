@@ -82,7 +82,10 @@ function handleconfirmpasstype(){
   return (
     <div className={styles.maincontainer}>
       <div className={styles.leftcontainer}>
-        <img src={Loginimg} alt="" />
+        <div>
+          <img src={Loginimg} alt="" />
+          <img src={Backimg} alt="" />
+        </div>
         <h2>Welcome aboard my friend</h2>
         <h3>just a couple of clicks and we start</h3>
       </div>

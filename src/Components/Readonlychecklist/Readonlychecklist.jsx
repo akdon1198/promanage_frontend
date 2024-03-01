@@ -11,11 +11,13 @@ const Readonlychecklist = () => {
     const [singlechecklist, setsinglechecklist] = useState("")
     const url = useLocation().pathname.split("/")[2]
     const [duedate, setduedate] = useState("")
+    const [checklistcardcont, setchecklistcardcont] = useState(false)
     console.log(singlechecklist);
     useEffect(()=>{
         axios.get(commonapiurl + "checklist/getsinglechecklist/" + url)
         .then((response)=>{
             setsinglechecklist(response.data.singlechecklist)
+            if(response.data.singlechecklist.checklistarr.length > 4) setchecklistcardcont(true)
             setduedate(montharr[parseInt(response.data.singlechecklist.duedate.split("-")[1]) - 1] + " " + response.data.singlechecklist.duedate.split("-")[2] + "th")
         })
         .catch(err=>{
@@ -58,7 +60,7 @@ const Readonlychecklist = () => {
                 </div>
                 <h2>{singlechecklist.name}</h2>
                 <h3>Checklist ({singlechecklist.markedval}/{singlechecklist?.checklistarr?.length})</h3>
-                <div className={styles.checklistcardcontainer}>
+                <div className={checklistcardcont ? styles.checklistcardcontainer2 : styles.checklistcardcontainer}>
                     {
                         singlechecklist.checklistarr?.map(checklist =>{
                             return(

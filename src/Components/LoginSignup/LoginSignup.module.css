@@ -28,10 +28,23 @@ h2, h3{
     font-weight: 300;
 }
 
-.leftcontainer img{
-    width: 20rem;
+.leftcontainer > div{
+    position: relative;
+    z-index: 2;
 }
 
+.leftcontainer > div img:first-child{
+    width: 20rem;
+    z-index: 2;
+}
+
+.leftcontainer > div img:last-child{
+    width: 12rem;
+    position: absolute;
+    left: 4rem;
+    top: 2rem;
+    z-index: -1;
+}
 .rightcontainer{
     /* background-color: gray; */
     width: 45%;

@@ -38,7 +38,9 @@ const Dashboard = () => {
   const url = window.location.origin
   const[copied, setcopied] = useState(false)
   const[datecurrent, setdatecurrent] = useState("")
+  const[Loading, setLoading] = useState(false)
   useEffect(() =>{
+    setLoading(true)
     let tempdate = new Date()
     setcurrendate(tempdate.getDate())
     setcurrentmonth(tempdate.getMonth() + 1)
@@ -50,15 +52,16 @@ const Dashboard = () => {
     }
     axios.get(commonapiurl + "checklist/getchecklist/" + userid + "?time=" + query)
     .then((response) =>{
+      setLoading(false)
       let tempchecklist = response.data.allchecklist
       setallchecklist(
         tempchecklist.map(checklist => {
-          if(checklist.duedate == "") return {...checklist, tempname : checklist.name.length < 50 ? checklist.name : checklist.name.slice(0, 50) + "..."}
+          if(checklist.duedate == "") return {...checklist, tempname : checklist.name.length < 28 ? checklist.name : checklist.name.slice(0, 28) + "..."}
           return {...checklist,
             date : parseInt(checklist.duedate.split("-")[2]),
             month : parseInt(checklist.duedate.split("-")[1]),
             year : parseInt(checklist.duedate.split("-")[0]),
-            tempname : checklist.name.length < 50 ? checklist.name : checklist.name.slice(0, 50) + "...",
+            tempname : checklist.name.length < 28 ? checklist.name : checklist.name.slice(0, 28) + "...",
             duedatestring : (montharr[parseInt(checklist.duedate.split("-")[1]) - 1] + " " + checklist.duedate.split("-")[2] + "th")
           }
         })
@@ -190,7 +193,7 @@ const Dashboard = () => {
       setopenpopup("")
     }
   }
-  return (
+  return(
     <>
     <div className={styles.maincontainer} onClick={closepopupcontainer}>
       <div className={styles.usernamedate}>
@@ -211,7 +214,10 @@ const Dashboard = () => {
           </div>
         }
       </div>
-      <div className={styles.sectioncontainer}>
+      {
+        Loading ? <div className={styles.Loading}>Loading...</div>
+        :
+        <div className={styles.sectioncontainer}>
         <div className={styles.section}>
           <div className={styles.sectiontitlecollapse}>
             <p>Backlog</p>
@@ -699,7 +705,8 @@ const Dashboard = () => {
           }
           </div>
         </div>
-      </div>
+        </div>
+      }
     </div>
     {
       deletecontainershow && <Delete

@@ -26,9 +26,13 @@ const userslice = createSlice({
         },
         resetchecklistid:(state)=>{
             state.checklisteditid = null
+        },
+        updatename: (state, action)=>{
+            state.name = action.payload
+            localStorage.setItem("user", JSON.stringify(state))
         }
     }
 })
 
-export const {adduser, resetuser, setchecklistid, resetchecklistid} = userslice.actions
+export const {updatename, adduser, resetuser, setchecklistid, resetchecklistid} = userslice.actions
 export default userslice.reducer
